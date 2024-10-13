@@ -9,8 +9,9 @@ El proyecto se divide en dos partes: una aplicación frontend desarrollada en Io
 1. [Comenzando 🚀](#comenzando)
     - [Pre-requisitos 📋](#pre-requisitos)
     - [Instalación 🔧](#instalación)
-2. [Construido con 🛠️](#construido)
-3. [Autora ✒️](#autora)
+2. [Colección de Postman 🔗](#postman)
+3. [Construido con 🛠️](#construido)
+4. [Autora ✒️](#autora)
 
 <a id="comenzando"></a>
 ## Comenzando 🚀
@@ -82,6 +83,15 @@ ionic serve
 ```
 
 La aplicación frontend estará disponible en http://localhost:8100.
+
+<a id="postman"></a>
+## Colección de Postman 🔗
+
+Para facilitar la prueba de los endpoints del backend, puedes acceder a la colección de **Postman** desde el siguiente enlace:
+
+[Acceder a la colección de Postman](https://red-space-909032.postman.co/workspace/Team-Workspace~bb29cf9f-f40c-4ede-875b-7cbba93858c3/collection/25947948-63618921-ea02-49ba-b92b-e745c6bfde20?action=share&creator=25947948)
+
+Este enlace contiene todas las peticiones necesarias para interactuar con la API, incluyendo las operaciones CRUD.
 
 <a id="construido"></a>
 ## Construido con 🛠️
