@@ -1,0 +1,109 @@
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title size="large">Editar Libro</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-input 
+      [(ngModel)]="data.title" 
+      [clearInput]="true" 
+      label="Título" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter text" 
+      (ionBlur)="validateTitle()"
+      (ionInput)="validateTitle()"
+      [class]="titleValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <ion-input 
+      [(ngModel)]="data.author" 
+      [clearInput]="true" 
+      label="Autor" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter text" 
+      (ionBlur)="validateAuthor()"
+      (ionInput)="validateAuthor()"
+      [class]="authorValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <ion-label position="stacked">Género</ion-label>
+    <ion-select  
+      [(ngModel)]="data.genre"
+      interface="action-sheet"
+      placeholder="Selecciona un género"
+    >
+      <ion-select-option *ngFor="let g of genres" [value]="g[0]">
+        {{ g[1] }}
+      </ion-select-option>
+    </ion-select>
+
+    <ion-textarea 
+      [(ngModel)]="data.review"
+      label="Opinión" 
+      labelPlacement="floating" 
+      placeholder="Enter text"
+      [autoGrow]="true"
+    ></ion-textarea>
+  
+    <ion-input 
+      [(ngModel)]="data.cover"
+      [clearInput]="true" 
+      label="Portada" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter text" 
+    ></ion-input>
+    
+    <ion-input 
+      [(ngModel)]="data.numberPages"
+      [clearInput]="true" 
+      label="Páginas totales" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter number" 
+      type="number"
+      (ionInput)="validatePages()"
+      [class]="numPagesValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <ion-input 
+      [(ngModel)]="data.readPages"
+      [clearInput]="true" 
+      label="Páginas leídas" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter number" 
+      type="number"
+      (ionInput)="validatePages()"
+      [class]="readPagesValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <ion-input 
+      [(ngModel)]="data.score"
+      [clearInput]="true" 
+      label="Puntuación" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter number" 
+      type="number"
+      (ionInput)="validateScore()"
+      [class]="scoreValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <div class="card-buttons">
+      <ion-icon [name]="isRead ? 'eye' : 'eye-outline'" color="primary" (click)="changeRead()"></ion-icon>
+      <ion-icon [name]="isFavorite ? 'heart' : 'heart-outline'" color="danger" (click)="changeFavorite()"></ion-icon>
+    </div>
+  </ion-list>
+
+  <div class="action-buttons">
+    <ion-button color="medium" [routerLink]="['/tabs/book', data.id]">Cancelar</ion-button>
+    <ion-button [disabled]="!isFormValid()" (click)="editBook(data)">Editar libro</ion-button>
+  </div>
+
+  <ion-label class="error-message">{{errorMessage}}</ion-label>
+</ion-content>

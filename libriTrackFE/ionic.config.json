@@ -1,0 +1,7 @@
+{
+  "name": "libriTrackFE",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

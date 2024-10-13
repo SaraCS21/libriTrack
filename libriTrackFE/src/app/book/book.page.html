@@ -1,0 +1,80 @@
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+
+  <div class="image-container">
+    <ng-container *ngIf="data.score; else noScore">
+      <ion-chip class="score-chip" color="dark">
+        <ion-icon color="warning" name="star"></ion-icon>
+        <ion-label>{{data.score}}</ion-label>
+      </ion-chip>
+    </ng-container>
+    <ng-template #noScore></ng-template>
+
+    <ng-container class="cover-container" *ngIf="data.cover; else noCover">
+      <img [src]="data.cover" alt="book cover" />
+
+      <h1 class="title-over-image">{{data.title}}</h1>
+      <h3 class="subtitle-over-image">{{data.author}}</h3>
+    </ng-container>
+    <ng-template #noCover></ng-template>
+  </div>
+
+  <ng-container class="cover-container" *ngIf="!data.cover; else hasCover">
+    <h1 class="title-over-image">{{data.title}}</h1>
+    <h3 class="subtitle-over-image">{{data.author}}</h3>
+  </ng-container>
+  <ng-template #hasCover></ng-template>
+  
+  <ion-grid [fixed]="true">
+    <ion-row class="genre">    
+      <ion-chip>{{data.genre}}</ion-chip>
+    </ion-row>
+
+    <ng-container *ngIf="data.review; else noReview">
+      <ion-row class="review">
+        <ion-label>{{data.review}}</ion-label>
+      </ion-row>
+    </ng-container>
+    <ng-template #noReview></ng-template>
+  </ion-grid>
+
+  <div class="buttons">
+    <ion-icon [name]="data.read ? 'eye' : 'eye-outline'" color="primary" (click)="changeRead(data)"></ion-icon>
+    <ion-icon [name]="data.favorite ? 'heart' : 'heart-outline'" color="danger" (click)="changeFavorite(data)"></ion-icon>
+  </div>
+
+  <ng-container *ngIf="data.readPages > 0 && data.numberPages > 0; else noPages">
+    <div class="read-progress">
+      <ion-progress-bar [value]="getProgress(data)"></ion-progress-bar>
+  
+      <div class="number-pages">
+        <ion-label>Páginas leídas: {{data.readPages}} </ion-label>
+        <ion-label>Páginas totales: {{data.numberPages}}</ion-label>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noPages></ng-template>
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small"> 
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top" class="action-buttons">
+      <ion-fab-button >
+        <ion-icon name="create" color="success" (click)="openEditBook(data.id)"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button id="delete-alert">
+        <ion-icon name="trash" color="danger"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-alert
+    trigger="delete-alert"
+    header="Eliminar libro"
+    message="Esta acción puede ser irreversible, ¿estás seguro de que quieres eliminar este libro?"
+    [buttons]="alertButtons"
+  ></ion-alert>
+  
+</ion-content>

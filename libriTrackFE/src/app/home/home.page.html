@@ -1,0 +1,68 @@
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+  <ion-header >
+    <ion-toolbar>
+      <ion-title size="large">Biblioteca</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-searchbar 
+    [(ngModel)]="searchTerm" 
+    (ionInput)="filterBooks($event)" 
+    show-clear-button="focus" 
+    placeholder="Busca un libro">
+  </ion-searchbar>
+
+  <ion-segment [(ngModel)]="segmentValue" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="single">
+      <ion-icon name="square-outline"></ion-icon>
+      <ion-icon class="ellipse" name="ellipse" [color]="segmentValue === 'single' ? 'medium' : 'light'"></ion-icon>
+    </ion-segment-button>
+    <ion-segment-button value="couple">
+      <ion-icon name="grid-outline"></ion-icon>
+      <ion-icon class="ellipse" name="ellipse" [color]="segmentValue === 'couple' ? 'medium' : 'light'"></ion-icon>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="card-list">
+    <ion-card [class.couple]="segmentValue === 'couple'" *ngFor="let b of filteredBooks; trackBy: trackByBookId">
+      <div class="image-container">
+        <ion-chip color="dark" [class.couple]="segmentValue === 'couple' || b.score <= 0">
+          <ion-icon color="warning" name="star"></ion-icon>
+          <ion-label>{{b.score}}</ion-label>
+        </ion-chip>
+        
+        <ng-container *ngIf="b.cover; else noCover">
+          <img [src]="b.cover" alt="book cover" />
+        </ng-container>
+        <ng-template #noCover></ng-template>
+        
+      </div>
+
+      <ion-progress-bar [value]="getProgress(b)"></ion-progress-bar>
+
+      <ion-card-content>
+          <ion-card-title [class.couple]="segmentValue === 'couple'">{{b.title}}</ion-card-title>
+          <ion-card-subtitle [class.couple]="segmentValue === 'couple'">{{b.author}}</ion-card-subtitle>
+
+          <br>
+
+          <div class="card-buttons" [class.couple]="segmentValue === 'couple'">
+              <div class="icons">
+                <ion-icon [name]="b.read ? 'eye' : 'eye-outline'" color="primary" (click)="changeRead(b)"></ion-icon>
+                <ion-icon [name]="b.favorite ? 'heart' : 'heart-outline'" color="danger" (click)="changeFavorite(b)"></ion-icon>
+              </div>
+
+              <ion-button fill="clear" [routerLink]="['/tabs/book', b.id]">
+                <ion-icon name="chevron-forward" color="success"></ion-icon>
+              </ion-button>
+          </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small" href="/tabs/add-books">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
