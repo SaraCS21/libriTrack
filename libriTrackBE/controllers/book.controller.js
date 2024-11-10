@@ -19,7 +19,7 @@ exports.create = (req, res) => {
         author: req.body.author,
         genre: req.body.genre,
         review: req.body.review,
-        cover: req.body.cover,
+        cover: req.file ? req.file.filename : "",
         numberPages: req.body.numberPages,
         readPages: req.body.readPages,
         score: req.body.score,
@@ -73,7 +73,6 @@ exports.findOne = (req, res) => {
 
 // Update a Book by the id in the request
 exports.update = (req, res) => {
-
     const id = req.params.id;
 
     Book.update(req.body, {
