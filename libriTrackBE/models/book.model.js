@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = (sequelize, Sequelize, db) => {
     const Book = sequelize.define("book", {
         title: {
             type: Sequelize.STRING,
@@ -34,6 +34,14 @@ module.exports = (sequelize, Sequelize) => {
         read: {
             type: Sequelize.BOOLEAN
         },
+        userEmail: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            references: {
+                model: db.users,
+                key: 'email'
+            }
+        }
     });
 
     return Book;
