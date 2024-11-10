@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -19,10 +19,8 @@ export class BooksService {
     return this.httpClient.get(`${this.endpoint}/${id}`);
   }
 
-  addBook(data: any) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  
-    this.httpClient.post(this.endpoint, JSON.stringify(data), { headers })
+  addBook(formData: FormData) {  
+    this.httpClient.post(this.endpoint, formData)
       .subscribe(
         response => {
           console.log('Success', response);
@@ -34,8 +32,8 @@ export class BooksService {
       );
   }
 
-  editBook(id: string, data: any) {
-    return this.httpClient.put(`${this.endpoint}/${id}`, data);
+  editBook(id: string, formData: FormData) {
+    return this.httpClient.put(`${this.endpoint}/${id}`, formData);
   }
 
   deleteBook(id: string) {

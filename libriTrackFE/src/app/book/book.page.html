@@ -10,7 +10,7 @@
     <ng-template #noScore></ng-template>
 
     <ng-container class="cover-container" *ngIf="data.cover; else noCover">
-      <img [src]="data.cover" alt="book cover" />
+      <img src="http://localhost:8080/images/{{data.cover}}" alt="book cover" />
 
       <h1 class="title-over-image">{{data.title}}</h1>
       <h3 class="subtitle-over-image">{{data.author}}</h3>

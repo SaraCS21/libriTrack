@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BooksService } from '../services/books.service';
+import { PhotoService } from '../services/photo.service';
 
 @Component({
   selector: 'app-add-books',
@@ -7,6 +8,7 @@ import { BooksService } from '../services/books.service';
   styleUrls: ['./add-books.page.scss'],
 })
 export class AddBooksPage implements OnInit {
+  capturedPhoto: string = "";
 
   errorMessage: string = '';
   titleValid: boolean = true;
@@ -43,9 +45,16 @@ export class AddBooksPage implements OnInit {
   
   genres = Object.entries(this.genresObj);
 
-  constructor(private booksService: BooksService) { }
+  constructor(
+    private booksService: BooksService, 
+    private photoService: PhotoService,
+  ) { }
 
   ngOnInit() {}
+
+  ionViewWillEnter() {
+    this.capturedPhoto = "";
+  }
 
   getGenreClass(genre: string) {
     return genre.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, '-').toLowerCase();
@@ -59,6 +68,22 @@ export class AddBooksPage implements OnInit {
   changeFavorite() {
     this.isFavorite = !this.isFavorite;
     this.data.favorite = this.isFavorite;
+  }
+
+  takePhoto() {
+    this.photoService.takePhoto().then(data => {
+      this.capturedPhoto = data.webPath? data.webPath : "";
+    });
+  }
+
+  pickImage() {
+    this.photoService.pickImage().then(data => {
+      this.capturedPhoto = data.webPath;
+    });
+  }
+
+  discardImage() {
+    this.capturedPhoto = "";
   }
   
   // Validate form
@@ -103,7 +128,19 @@ export class AddBooksPage implements OnInit {
   }
 
   // CRUD
-  addBook(data: any) {
-    this.booksService.addBook(data);
+  async addBook(data: any) {
+    let formData = new FormData();    
+
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+
+    if (this.capturedPhoto) {
+      const response = await fetch(this.capturedPhoto);
+      const blob = await response.blob();
+      formData.append('cover', blob, 'photo.jpg');  
+    }
+
+    this.booksService.addBook(formData);
   }
 }
