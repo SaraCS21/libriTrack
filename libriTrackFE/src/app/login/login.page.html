@@ -1,0 +1,45 @@
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+  <ion-header >
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-input 
+      [(ngModel)]="data.email" 
+      [clearInput]="true" 
+      label="Correo" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter text" 
+      (ionBlur)="validateEmail()"
+      (ionInput)="validateEmail()"
+      [class]="emailValid ? 'valid' : 'invalid'"
+      type="email"
+    ></ion-input>
+
+    <ion-input 
+      [(ngModel)]="data.password" 
+      [clearInput]="true" 
+      label="Contraseña" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter text" 
+      (ionBlur)="validatePassword()"
+      (ionInput)="validatePassword()"
+      [class]="passwordValid ? 'valid' : 'invalid'"
+      type="password"
+    ></ion-input>
+
+    <div class="action-buttons">      
+      <ion-button [disabled]="!isFormValid()" (click)="login()">Login</ion-button>
+    </div>
+
+    <div class="register">
+      ¿Aún no tienes cuenta? <a href="/register">Regístrate</a>
+    </div>
+  </ion-list>
+
+  <ion-label class="error-message">{{errorMessage}}</ion-label>
+</ion-content>

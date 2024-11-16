@@ -8,10 +8,10 @@ module.exports = app => {
     router.post("/", upload.single("cover"), books.create);
   
     // Retrieve all Books
-    router.get("/", books.findAll);
+    router.get("/:email", books.findAll);
   
     // Retrieve a single Book with id
-    router.get("/:id", books.findOne);
+    router.get("/:email/:id", books.findOne);
   
     // Update a Book with id
     router.put("/:id", books.update);

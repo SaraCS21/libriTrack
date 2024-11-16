@@ -19,14 +19,24 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.books = require("./book.model.js")(sequelize, Sequelize, db);
+db.movies = require("./movie.model.js")(sequelize, Sequelize, db);
 db.users = require("./user.model.js")(sequelize, Sequelize, db);
 
 db.users.hasMany(db.books, {
     foreignKey: 'userEmail', 
     as: 'books',
 });
+db.users.hasMany(db.books, {
+    foreignKey: 'userEmail', 
+    as: 'movies',
+});
 
 db.books.belongsTo(db.users, {
+    foreignKey: 'userEmail',
+    as: 'user',
+});
+
+db.movies.belongsTo(db.users, {
     foreignKey: 'userEmail',
     as: 'user',
 });

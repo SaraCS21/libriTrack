@@ -1,0 +1,109 @@
+ion-content {
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+}
+
+ion-toolbar {
+    --background: transparent;
+}
+
+h1 {
+    width: 100%;
+
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+h3 {
+    width: 100%;
+
+    text-align: center;
+    font-size: 1.3em;
+
+    opacity: 0.8;
+}
+
+img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));  
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.image-container {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+
+.cover-container .title-over-image {
+    position: absolute;
+    bottom: -20px;
+    z-index: 10;
+}
+
+.cover-container .subtitle-over-image {
+    position: absolute;
+    bottom: -50px;
+    z-index: 10;
+}
+
+.score-chip {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    z-index: 10;
+}
+
+ion-grid {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    width: 100%;
+
+    .genre {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .review {
+        margin-top: 1rem;
+        line-height: 1.8rem;
+    }
+}
+
+.number-pages {
+    width: 80%;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    opacity: 0.8;
+}
+
+.buttons {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1.5rem;
+
+    font-size: 1.8rem;
+}
+
+.action-buttons {
+    ion-icon {
+        font-size: 1.5rem;
+    }
+}
+

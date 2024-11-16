@@ -85,7 +85,7 @@ export class BookPage implements OnInit {
 
   deleteBook(id: string) {
     this.booksService.deleteBook(id).subscribe(() => {
-      this.router.navigate(['']);
+      this.router.navigate(['/tabs/home']);
     });
   }
 }

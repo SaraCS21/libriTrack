@@ -1,0 +1,128 @@
+ion-toolbar {
+    --background: transparent;
+}
+
+ion-card-subtitle {
+    margin-top: 0.4rem;
+}
+
+ion-chip {
+    opacity: 1;
+
+    ion-icon {
+        font-size: 1.2em;
+    }
+}
+
+ion-chip.couple {
+    opacity: 0;
+}
+
+ion-segment {
+    padding-right: .5rem;
+    display: flex;
+    justify-content: flex-end;
+
+    --background: transparent;
+}
+
+ion-segment-button {
+    min-width: 5%;
+    --indicator-color: transparent;
+
+    ion-icon {
+        font-size: 1.5em;
+    }
+
+    .ellipse {
+        font-size: .5rem;
+        padding-top: .2rem;
+        transition: color 0.5s ease-in-out, fill 0.5s ease-in-out;
+    }
+}
+
+ion-card-title {
+    font-size: 1.6em;
+}
+
+ion-card-subtitle {
+    font-size: .8em;
+}
+
+ion-card-title.couple {
+    font-size: 1em;
+    line-height: 1.5rem;
+}
+
+ion-card-subtitle.couple {
+    font-size: 0.6em;
+}
+
+.card-list {
+    width: 100%;
+    
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+ion-card {
+    width: 100%;
+    transition: 0.5s ease-in-out;
+}
+
+ion-card.couple {
+    width: 41%;
+}
+
+.card-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .icons {
+        display: flex;
+    }
+
+    ion-icon {
+        font-size: 1.5em;
+        margin: 0 0.5em;
+    }
+}
+
+ion-button {
+    --padding-start: 0;
+    --padding-end: 0;
+}
+
+.card-buttons.couple {
+    flex-direction: column;
+    align-items: flex-start;
+    
+    ion-icon {
+        font-size: 1.3em;
+    }
+
+    ion-button {
+        align-self: flex-end;
+    }
+}
+
+.image-container {
+    position: relative;
+    width: 100%; 
+
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    ion-chip {
+        position: absolute; 
+        top: 10px; 
+        right: 10px;
+    }
+}
+  

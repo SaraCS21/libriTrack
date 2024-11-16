@@ -1,9 +1,13 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcrypt');
+
 const db = require("../models");
-const User = db.users;  // Asegúrate de que la ruta esté correcta
-const Op = db.Sequelize.Op;
+const User = db.users; 
+const Movie = db.movies;
+const Book = db.books;
 
 // Create and Save a new User
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     // Validate request
     if (!req.body.name || !req.body.email || !req.body.password) {
         res.status(400).send({
@@ -12,11 +16,14 @@ exports.create = (req, res) => {
         return;
     }
 
+    // Encriptar la contraseña
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
     // Create a User
     const user = {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password, 
+        password: hashedPassword, 
     };
 
     // Save User in the database
@@ -90,26 +97,77 @@ exports.update = (req, res) => {
 };
 
 // Delete a User with the specified email in the request
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
     const email = req.params.email;
 
-    User.destroy({
-        where: { email: email }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "User was deleted successfully!"
-                });
-            } else {
-                res.send({
-                    message: `Cannot delete User with email=${email}. Maybe User was not found!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Could not delete User with email=" + email
-            });
+    try {
+        // Eliminar los registros relacionados en la tabla "movies"
+        await Movie.destroy({ where: { userEmail: email } });
+        
+        // Eliminar los registros relacionados en la tabla "books"
+        await Book.destroy({ where: { userEmail: email } });
+
+        // Luego, eliminar el usuario
+        const num = await User.destroy({ where: { email: email } });
+
+        if (num === 1) {
+            res.send({ message: "User was deleted successfully!" });
+        } else {
+            res.send({ message: `Cannot delete User with email=${email}. Maybe User was not found!` });
+        }
+    } catch (err) {
+        console.error('Error al eliminar:', err);
+        res.status(500).send({ message: "Could not delete User with email=" + email });
+    }
+};
+
+// exports.login = async (req, res) => {
+//     const { email, password } = req.auth;
+
+//     User.findOne({ where: { email } })
+//         .then(user => {
+//             if (!user) {
+//                 return res.status(404).send({ message: `User with email=${email} not found.` });
+//             }
+
+//             const isPasswordValid = bcrypt.compareSync(password, user.password);
+//             if (!isPasswordValid) {
+//                 return res.status(401).send({ message: "Invalid password" });
+//             }
+
+//             res.send({ message: "Authenticated successfully", user });
+//         })
+//         .catch(err => {
+//             res.status(500).send({ message: "Error retrieving user", error: err.message });
+//         });
+// };
+
+exports.login = async (req, res) => {
+    const { email, password } = req.auth;
+
+    try {
+        const user = await User.findOne({ where: { email } });
+        if (!user) {
+            return res.status(404).send({ message: "User not found" });
+        }
+
+        const isPasswordValid = bcrypt.compareSync(password, user.password);
+        if (!isPasswordValid) {
+            return res.status(401).send({ message: "Invalid password" });
+        }
+
+        // Generar el token JWT
+        const token = jwt.sign(
+            { email: user.email }, 
+            process.env.JWT_SECRET, 
+            { expiresIn: process.env.JWT_EXPIRATION } 
+        );
+
+        res.send({
+            message: "Authenticated successfully",
+            token,
         });
+    } catch (error) {
+        res.status(500).send({ message: "Error during login", error: error.message });
+    }
 };

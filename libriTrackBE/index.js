@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const express = require('express');
 const cors = require('cors');
 
@@ -12,7 +14,7 @@ app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 var corsOptions = {
-    origin: ['http://localhost:8081', 'http://localhost:4200']
+    origin: ['http://localhost:8081', 'http://localhost:4200', 'http://localhost:8100']
 };
 
 app.use(cors(corsOptions));
@@ -24,12 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 const db = require('./models');
 
 // ESTE NO ELIMINA LA BASE DE DATOS
-// db.sequelize.sync();
+db.sequelize.sync();
 
 // ESTE ELIMINA LA BASE DE DATOS
-db.sequelize.sync({ force: true }).then(() => {
-    console.log("Drop and re-sync db.");
-});
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log("Drop and re-sync db.");
+// });
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to LibriTrack API.' });
@@ -37,6 +39,7 @@ app.get('/', (req, res) => {
 
 require('./routes/book.routes')(app);
 require('./routes/user.routes')(app);
+require('./routes/movie.routes')(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {

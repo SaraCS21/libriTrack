@@ -1,0 +1,68 @@
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+
+  <div class="image-container">
+    <ng-container *ngIf="data.score; else noScore">
+      <ion-chip class="score-chip" color="dark">
+        <ion-icon color="warning" name="star"></ion-icon>
+        <ion-label>{{data.score}}</ion-label>
+      </ion-chip>
+    </ng-container>
+    <ng-template #noScore></ng-template>
+
+    <ng-container class="cover-container" *ngIf="data.cover; else noCover">
+      <img src="http://localhost:8080/images/{{data.cover}}" alt="movie cover" />
+
+      <h1 class="title-over-image">{{data.title}}</h1>
+      <h3 class="subtitle-over-image">{{data.director}}</h3>
+    </ng-container>
+    <ng-template #noCover></ng-template>
+  </div>
+
+  <ng-container class="cover-container" *ngIf="!data.cover; else hasCover">
+    <h1 class="title-over-image">{{data.title}}</h1>
+    <h3 class="subtitle-over-image">{{data.director}}</h3>
+  </ng-container>
+  <ng-template #hasCover></ng-template>
+  
+  <ion-grid [fixed]="true">
+    <ion-row class="genre">    
+      <ion-chip>{{data.genre}}</ion-chip>
+    </ion-row>
+
+    <ng-container *ngIf="data.review; else noReview">
+      <ion-row class="review">
+        <ion-label>{{data.review}}</ion-label>
+      </ion-row>
+    </ng-container>
+    <ng-template #noReview></ng-template>
+  </ion-grid>
+
+  <div class="buttons">
+    <ion-icon [name]="data.seen ? 'eye' : 'eye-outline'" color="primary" (click)="changeSeen(data)"></ion-icon>
+    <ion-icon [name]="data.favorite ? 'heart' : 'heart-outline'" color="danger" (click)="changeFavorite(data)"></ion-icon>
+  </div>
+  
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small"> 
+      <ion-icon name="chevron-up"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="top" class="action-buttons">
+      <ion-fab-button >
+        <ion-icon name="create" color="success" (click)="openEditMovie(data.id)"></ion-icon>
+      </ion-fab-button>
+
+      <ion-fab-button id="delete-alert">
+        <ion-icon name="trash" color="danger"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <ion-alert
+    trigger="delete-alert"
+    header="Eliminar película"
+    message="Esta acción puede ser irreversible, ¿estás seguro de que quieres eliminar esta película?"
+    [buttons]="alertButtons"
+  ></ion-alert>
+  
+</ion-content>

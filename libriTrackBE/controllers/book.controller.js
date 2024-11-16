@@ -1,6 +1,5 @@
 const db = require("../models");
 const Book = db.books;
-const Op = db.Sequelize.Op;
 
 const User = db.users;
 
@@ -51,7 +50,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Books from the database.
 exports.findAll = (req, res) => {
-    const userEmail = req.body.userEmail;
+    const userEmail = req.params.email;
 
     User.findOne({
         where: { email: userEmail }
@@ -84,7 +83,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Book with an id
 exports.findOne = (req, res) => {
-    const email = req.body.userEmail; 
+    const email = req.params.email; 
     const bookId = req.params.id;   
 
     User.findOne({ where: { email: email } })

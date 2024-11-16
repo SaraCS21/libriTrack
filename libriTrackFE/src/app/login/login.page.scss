@@ -1,0 +1,47 @@
+ion-toolbar {
+    --background: transparent;
+}
+
+ion-toolbar {
+    --background: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.list-ios {
+    background: transparent !important;
+}
+
+ion-input, ion-select {
+    margin-bottom: 1.5rem;
+}
+
+.card-buttons {
+    display: flex;
+    justify-content:space-around;
+
+    font-size: 2rem;
+}
+
+.action-buttons {
+    margin-top: 1.5rem;
+    margin-bottom: .8rem;
+    display: flex;
+    justify-content: center;
+}
+
+.error-message {
+    color: red;
+    font-size: 1rem;
+}
+
+.invalid {
+    color: red;
+}
+
+.register {
+    color: #b6b6b6;
+    text-align: center;
+
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+}

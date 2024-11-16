@@ -2,17 +2,18 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { FavoritesPage } from './favorites.page';
 
-import { FavoritesPageRoutingModule } from './favorites-routing.module';
+import { HomeMoviesPageRoutingModule } from './homeMovies-routing.module';
+
+import { HomeMoviesPage } from './homeMovies.page';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    FavoritesPageRoutingModule
+    HomeMoviesPageRoutingModule
   ],
-  declarations: [FavoritesPage]
+  declarations: [HomeMoviesPage]
 })
-export class FavoritesPageModule {}
+export class HomeMoviesPageModule {}

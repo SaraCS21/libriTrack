@@ -1,0 +1,100 @@
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title size="large">Nueva Película</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list>
+    <ion-input 
+      [(ngModel)]="data.title" 
+      [clearInput]="true" 
+      label="Título" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter text" 
+      (ionBlur)="validateTitle()"
+      (ionInput)="validateTitle()"
+      [class]="titleValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <ion-input 
+      [(ngModel)]="data.director" 
+      [clearInput]="true" 
+      label="Director" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter text" 
+      (ionBlur)="validateDirector()"
+      (ionInput)="validateDirector()"
+      [class]="directorValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <ion-label position="stacked">Género</ion-label>
+    <ion-select  
+      [(ngModel)]="data.genre"
+      interface="action-sheet"
+      placeholder="Selecciona un género"
+    >
+      <ion-select-option *ngFor="let g of genres" [value]="g[0]">
+        {{ g[1] }}
+      </ion-select-option>
+    </ion-select>
+
+    <ion-textarea 
+      [(ngModel)]="data.review"
+      label="Opinión" 
+      labelPlacement="floating" 
+      placeholder="Enter text"
+      [autoGrow]="true"
+    ></ion-textarea>
+
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6">
+          <ion-img class="photo-frame" *ngIf="capturedPhoto" [src]="capturedPhoto" (click)="takePhoto()"></ion-img>
+          <ion-img class="photo-frame" *ngIf="!capturedPhoto" src="../../assets/No-Image-Placeholder.svg"
+            (click)="takePhoto()"></ion-img>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button color="primary" fill="outline" (click)="takePhoto()">
+            <ion-icon slot="start" name="camera-outline"></ion-icon>
+            Take a photo
+          </ion-button>
+          <ion-button color="primary" fill="outline" (click)="pickImage()">
+            <ion-icon slot="start" name="image-outline"></ion-icon>
+            Pick an image
+          </ion-button>
+          <ion-button color="danger" fill="outline" (click)="discardImage()">
+            <ion-icon slot="start" name="aperture"></ion-icon>
+            Discard image
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-input 
+      [(ngModel)]="data.score"
+      [clearInput]="true" 
+      label="Puntuación" 
+      label-placement="floating" 
+      fill="outline" 
+      placeholder="Enter number" 
+      type="number"
+      (ionInput)="validateScore()"
+      [class]="scoreValid ? 'valid' : 'invalid'"
+    ></ion-input>
+
+    <div class="card-buttons">
+      <ion-icon [name]="isSeen ? 'eye' : 'eye-outline'" color="primary" (click)="changeSeen()"></ion-icon>
+      <ion-icon [name]="isFavorite ? 'heart' : 'heart-outline'" color="danger" (click)="changeFavorite()"></ion-icon>
+    </div>
+  </ion-list>
+
+  <div class="action-buttons">
+    <ion-button color="medium" href="">Cancelar</ion-button>
+    <ion-button [disabled]="!isFormValid()" (click)="addMovie(data)">Crear película</ion-button>
+  </div>
+
+  <ion-label class="error-message">{{errorMessage}}</ion-label>
+</ion-content>

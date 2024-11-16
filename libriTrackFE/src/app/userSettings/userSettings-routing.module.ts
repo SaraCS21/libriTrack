@@ -5,7 +5,7 @@ import { userSettingsPage } from './userSettings.page';
 const routes: Routes = [
   {
     path: '',
-    component: userSettingsPage,
+    component: userSettingsPage
   }
 ];
 

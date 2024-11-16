@@ -1,11 +1,3 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Página de favoritos
-    </ion-title>
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content [fullscreen]="true" color="light" class="ion-padding">
   <ion-header >
     <ion-toolbar>
@@ -13,5 +5,18 @@
     </ion-toolbar>
   </ion-header>
 
-  <h1>WIP</h1>
+  <ion-list>
+    <div class="action-buttons">      
+      <ion-button href="/tabs/userConfig">Configuración</ion-button>
+      <ion-button id="delete-alert" color="danger">Eliminar usuario</ion-button>
+      <ion-button (click)="logOut()" color="medium">Cerrar sesión</ion-button>
+    </div>
+  </ion-list>
+
+  <ion-alert
+    trigger="delete-alert"
+    header="Eliminar usuario"
+    message="Esta acción puede ser irreversible, ¿estás seguro de que quieres eliminar este usuario?"
+    [buttons]="alertButtons"
+  ></ion-alert>
 </ion-content>

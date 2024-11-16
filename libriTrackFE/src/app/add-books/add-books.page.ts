@@ -135,6 +135,9 @@ export class AddBooksPage implements OnInit {
       formData.append(key, data[key]);
     }
 
+    const userEmail = localStorage.getItem('email');
+    userEmail && formData.append('userEmail', userEmail);
+
     if (this.capturedPhoto) {
       const response = await fetch(this.capturedPhoto);
       const blob = await response.blob();

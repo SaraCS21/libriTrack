@@ -12,19 +12,21 @@ export class BooksService {
   constructor(private httpClient: HttpClient, private router: Router) { }
 
   getAllBooks() {
-    return this.httpClient.get(this.endpoint);
+    const email = localStorage.getItem('email');
+    return this.httpClient.get(`${this.endpoint}/${email}`);
   }
 
   getBook(id: string) {
-    return this.httpClient.get(`${this.endpoint}/${id}`);
+    const email = localStorage.getItem('email');
+    return this.httpClient.get(`${this.endpoint}/${email}/${id}`);
   }
 
-  addBook(formData: FormData) {  
+  addBook(formData: FormData) {      
     this.httpClient.post(this.endpoint, formData)
       .subscribe(
         response => {
           console.log('Success', response);
-          this.router.navigate(['']);
+          this.router.navigate(['/tabs/home']);
         },
         error => {
           console.error('Error', error);

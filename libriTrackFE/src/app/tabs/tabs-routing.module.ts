@@ -4,7 +4,7 @@ import { TabsPage } from './tabs.page';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
@@ -12,12 +12,16 @@ const routes: Routes = [
         loadChildren: () => import('../home/home.module').then(m => m.HomePageModule)
       },
       {
-        path: 'favorites',
-        loadChildren: () => import('../favorites/favorites.module').then(m => m.FavoritesPageModule)
+        path: 'homeMovies',
+        loadChildren: () => import('../homeMovies/homeMovies.module').then(m => m.HomeMoviesPageModule)
       },
       {
         path: 'userSettings',
         loadChildren: () => import('../userSettings/userSettings.module').then(m => m.UserSettingsPageModule)
+      },
+      {
+        path: 'userConfig',
+        loadChildren: () => import('../userConfig/userConfig.module').then(m => m.UserConfigPageModule)
       },
       {
         path: 'add-books',
@@ -30,6 +34,18 @@ const routes: Routes = [
       {
         path: 'edit-book/:id',
         loadChildren: () => import('../edit-book/edit-book.module').then( m => m.EditBookPageModule)
+      },
+      {
+        path: 'add-movies',
+        loadChildren: () => import('../add-movies/add-movies.module').then( m => m.AddMoviesPageModule)
+      },
+      {
+        path: 'movie/:id',
+        loadChildren: () => import('../movie/movie.module').then( m => m.MoviePageModule)
+      },
+      {
+        path: 'edit-movie/:id',
+        loadChildren: () => import('../edit-movie/edit-movie.module').then( m => m.EditMoviePageModule)
       },
       {
         path: '',

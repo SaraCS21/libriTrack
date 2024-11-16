@@ -85,11 +85,4 @@ export class HomePage {
       this.getAllBooks();
     });
   }
-
-  // deleteBook(id: string) {
-  //   this.booksService.deleteBook(id).subscribe(() => {
-  //     this.getAllBooks();
-  //   });
-  // }
-
 }
