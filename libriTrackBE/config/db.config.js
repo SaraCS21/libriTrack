@@ -1,7 +1,7 @@
 module.exports = {
     HOST: "localhost",
-    USER: "root",
-    PASSWORD: "1234",
+    USER: process.env.DB_USER,
+    PASSWORD: process.env.DB_PASSWORD,
     DB: "libritrack_db",
     dialect: "mysql",
     pool: {
