@@ -1,6 +1,6 @@
 # LibriTrack
 
-LibriTrack es una aplicación móvil que permite a los usuarios realizar un seguimiento de sus libros leídos, crear listas de deseos y saber el punto del libro en el que el usuario se ha podido quedar durante su lectura. 
+LibriTrack es una aplicación móvil que permite a los usuarios realizar un seguimiento de sus libros leídos y sus películas vistas, crear listas de deseos y saber el punto del libro en el que el usuario se ha podido quedar durante su lectura. 
 
 El proyecto se divide en dos partes: una aplicación frontend desarrollada en Ionic con Angular y un backend en Express, que utiliza Sequelize como ORM y MySQL como base de datos. Ambos componentes están alojados en el mismo repositorio.
 
@@ -58,13 +58,17 @@ cd libriTrackBE/
 npm install
 ```
 
-4. Configura la base de datos:
+4. Configura las variables .env
+
+En el backend hay un fichero .env.example que hay que rellenar y renombrar como .env, de esta forma podremos hacer uso del jwt.
+
+5. Configura la base de datos:
 
 Asegúrate de tener MySQL ejecutándose localmente. Puedes ver los datos en local para conectarte a MySQL Workbench dentro de libriTrackBE/config/db.config.js
 
 Ten en cuenta, la primera vez que ejecutes el backend, que en el libriTrackBE/index.js debe estar comentada la línea 19 y descomentada de la 22 a la 24. Cuando ya tengas creada tu base de datos, debes tenerlo al contrario.
 
-5. Ejecuta el servidor backend:
+6. Ejecuta el servidor backend:
 
 ```
 cd libriTrackBE/
@@ -74,7 +78,7 @@ npm start
 
 El backend estará disponible en http://localhost:8080.
 
-6. Ejecuta la aplicación frontend:
+7. Ejecuta la aplicación frontend:
 
 ```
 cd libriTrackFE/
@@ -91,7 +95,8 @@ Para facilitar la prueba de los endpoints del backend, puedes acceder a la colec
 
 [Acceder a la colección de Postman](https://red-space-909032.postman.co/workspace/Team-Workspace~bb29cf9f-f40c-4ede-875b-7cbba93858c3/collection/25947948-63618921-ea02-49ba-b92b-e745c6bfde20?action=share&creator=25947948)
 
-Este enlace contiene todas las peticiones necesarias para interactuar con la API, incluyendo las operaciones CRUD.
+Este enlace contiene todas las peticiones necesarias para interactuar con la API, incluyendo las rutas de registro, inicio de sesión y operaciones CRUD.
+
 
 <a id="construido"></a>
 ## Construido con 🛠️
@@ -103,6 +108,7 @@ Este enlace contiene todas las peticiones necesarias para interactuar con la API
 * [![Sequelize](https://img.shields.io/badge/Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white)](https://sequelize.org/) - ORM para manejo de bases de datos
 * [![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/) - Sistema de gestión de bases de datos
 * [	![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)](https://www.postman.com/) - Herramienta para pruebas de API
+* [ ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens) ](https://jwt.io/) - Para la protección de rutas
 
 <a id="autora"></a>
 ## Autora ✒️
