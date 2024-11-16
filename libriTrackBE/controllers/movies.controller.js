@@ -15,7 +15,7 @@ exports.create = (req, res) => {
             });
         }
 
-        // Crear la película
+        // Create movie
         const movie = {
             title: req.body.title,
             director: req.body.director,
@@ -28,7 +28,7 @@ exports.create = (req, res) => {
             userEmail: user.email 
         };
 
-        // Guardar la película en la base de datos
+        // Save Movie in the database
         Movie.create(movie)
             .then(data => {
                 res.send(data);
@@ -130,7 +130,7 @@ exports.update = (req, res) => {
             });
         }
 
-        // Actualizar la película
+        // Update movie
         Movie.update(req.body, { where: { id: id } })
             .then(num => {
                 if (num == 1) {

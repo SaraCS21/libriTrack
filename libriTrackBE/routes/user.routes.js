@@ -19,7 +19,6 @@ module.exports = app => {
 
     // Login a User
     router.post("/login", authBasic, users.login);
-    // router.post("/login", users.login);
 
     app.use('/api/users', router);
 };

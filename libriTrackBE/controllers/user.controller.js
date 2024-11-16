@@ -16,7 +16,7 @@ exports.create = async (req, res) => {
         return;
     }
 
-    // Encriptar la contraseña
+    // Encrypt the password
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
     // Create a User
@@ -101,13 +101,13 @@ exports.delete = async (req, res) => {
     const email = req.params.email;
 
     try {
-        // Eliminar los registros relacionados en la tabla "movies"
+        // Delete the records related to the user in the table "movies"
         await Movie.destroy({ where: { userEmail: email } });
         
-        // Eliminar los registros relacionados en la tabla "books"
+        // Delete the records related to the user in the table "books"
         await Book.destroy({ where: { userEmail: email } });
 
-        // Luego, eliminar el usuario
+        // Then, delete the user
         const num = await User.destroy({ where: { email: email } });
 
         if (num === 1) {
@@ -120,27 +120,6 @@ exports.delete = async (req, res) => {
         res.status(500).send({ message: "Could not delete User with email=" + email });
     }
 };
-
-// exports.login = async (req, res) => {
-//     const { email, password } = req.auth;
-
-//     User.findOne({ where: { email } })
-//         .then(user => {
-//             if (!user) {
-//                 return res.status(404).send({ message: `User with email=${email} not found.` });
-//             }
-
-//             const isPasswordValid = bcrypt.compareSync(password, user.password);
-//             if (!isPasswordValid) {
-//                 return res.status(401).send({ message: "Invalid password" });
-//             }
-
-//             res.send({ message: "Authenticated successfully", user });
-//         })
-//         .catch(err => {
-//             res.status(500).send({ message: "Error retrieving user", error: err.message });
-//         });
-// };
 
 exports.login = async (req, res) => {
     const { email, password } = req.auth;
@@ -156,7 +135,7 @@ exports.login = async (req, res) => {
             return res.status(401).send({ message: "Invalid password" });
         }
 
-        // Generar el token JWT
+        // Generate token
         const token = jwt.sign(
             { email: user.email }, 
             process.env.JWT_SECRET, 

@@ -60,7 +60,7 @@ npm install
 
 4. Configura las variables .env
 
-En el backend hay un fichero .env.example que hay que rellenar y renombrar como .env, de esta forma podremos hacer uso del jwt.
+En el backend hay un fichero .env.example que hay que rellenar y renombrar como .env.
 
 5. Configura la base de datos:
 

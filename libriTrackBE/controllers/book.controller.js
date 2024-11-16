@@ -15,7 +15,7 @@ exports.create = (req, res) => {
             });
         }
 
-        // Crear el libro
+        // Create book
         const book = {
             title: req.body.title,
             author: req.body.author,
@@ -30,7 +30,7 @@ exports.create = (req, res) => {
             userEmail: user.email 
         };
 
-        // Guardar el libro en la base de datos
+        // Save Book in the database
         Book.create(book)
             .then(data => {
                 res.send(data);
@@ -132,7 +132,7 @@ exports.update = (req, res) => {
             });
         }
 
-        // Actualizar el libro
+        // Update book
         Book.update(req.body, { where: { id: id } })
             .then(num => {
                 if (num == 1) {

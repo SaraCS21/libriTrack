@@ -23,7 +23,7 @@ export class HomePage {
     this.getAllBooks();
   }
 
-  // Método trackBy para optimizar el *ngFor
+  // TrackBy method to improve performance
   trackByBookId(index: number, book: any): number {
     return book.id;
   }

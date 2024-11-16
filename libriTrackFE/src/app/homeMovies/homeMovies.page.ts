@@ -24,7 +24,7 @@ export class HomeMoviesPage {
     this.getAllMovies();
   }
 
-  // Método trackBy para optimizar el *ngFor
+  // TrackBy method to improve performance
   trackByMovieId(index: number, movie: any): number {
     return movie.id;
   }
